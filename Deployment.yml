@@ -1,28 +1,27 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-   name: devops
+  name: devops
 spec:
-   replicas: 2
-   selector:      # tells the controller which pods to watch/belong to
+  replicas: 2
+  selector:      
     matchLabels:
-     app: devops
-   template:
-      metadata:
-        labels:
-          app: devops
-      spec:
-       containers:
-        - name: devops
-          image: mayuribelamkar/pipline2
-          imagePullPolicy: Always
-          ports:
+      app: devops
+  template:
+    metadata:
+      labels:
+        app: devops
+    spec:
+      containers:
+      - name: devops
+        image: mayuribelamkar/pipline2
+        imagePullPolicy: Always
+        ports:
         - containerPort: 80
       tolerations:
-        - key: node-role.kubernetes.io/control-plane
-          operator: Exists
-          effect: NoSchedule
-        - key: node.kubernetes.io/unreachable
-          operator: Exists
-          effect: NoExecute
-        
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node.kubernetes.io/unreachable
+        operator: Exists
+        effect: NoExecute
